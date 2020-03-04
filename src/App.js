@@ -24,7 +24,7 @@ class App extends PureComponent {
 
   onScorerClick = payload => this.service.send({ type: 'DONE', payload });
 
-  onHighscoreClick = payload => this.service.send({ type: 'RESTART', payload });
+  onGameEndClick = payload => this.service.send({ type: 'RESTART', payload });
 
   render() {
     const { current } = this.state;
@@ -48,7 +48,7 @@ class App extends PureComponent {
           <GameEnd
             player1Score={player1Score}
             player2Score={player2Score}
-            onActionClick={this.onHighscoreClick}
+            onActionClick={this.onGameEndClick}
           />
         ) : (
           <Scorer key={current.value} onActionClick={this.onScorerClick} />
