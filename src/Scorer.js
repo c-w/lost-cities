@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Fragment, PureComponent } from 'react';
 import fromPairs from 'lodash.frompairs';
 import sum from 'lodash.sum';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -118,7 +118,7 @@ class Scorer extends PureComponent {
 
   render() {
     return (
-      <React.Fragment>
+      <Fragment>
         <Grid container>
           {EXPEDITIONS.map(color => (
             <Grid key={color} item xs={12} sm={6}>
@@ -127,7 +127,7 @@ class Scorer extends PureComponent {
           ))}
         </Grid>
         <ActionButton onClick={this.onActionClick} icon="check" label="Done" />
-      </React.Fragment>
+      </Fragment>
     );
   }
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function Highscore({ player1Score, player2Score, onActionClick }) {
   return (
-    <React.Fragment>
+    <Fragment>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -50,7 +50,7 @@ function Highscore({ player1Score, player2Score, onActionClick }) {
       </TableContainer>
 
       <ActionButton onClick={onActionClick} icon="redo" label="Restart" />
-    </React.Fragment>
+    </Fragment>
   );
 }
 

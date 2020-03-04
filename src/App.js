@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Fragment, PureComponent } from 'react';
 import Highscore from './Highscore';
 import Scorer from './Scorer';
 import TopBar from './TopBar';
@@ -37,7 +37,7 @@ class App extends PureComponent {
     } = current.context;
 
     return (
-      <React.Fragment>
+      <Fragment>
         <TopBar
           gameRound={gameRound}
           player1Score={player1Score}
@@ -53,7 +53,7 @@ class App extends PureComponent {
         ) : (
           <Scorer key={current.value} onActionClick={this.onScorerClick} />
         )}
-      </React.Fragment>
+      </Fragment>
     );
   }
 }
