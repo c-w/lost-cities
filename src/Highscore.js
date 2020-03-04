@@ -5,8 +5,8 @@ import { PLAYER_1, PLAYER_2 } from './game';
 import { faRedo } from '@fortawesome/free-solid-svg-icons/faRedo';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-function Highscore({ scores, onActionClick }) {
-  const [ winner, label ] = scores[PLAYER_1] > scores[PLAYER_2]
+function Highscore({ player1Score, player2Score, onActionClick }) {
+  const [ winner, label ] = player1Score > player2Score
     ? [ PLAYER_1, 'Player 1' ]
     : [ PLAYER_2, 'Player 2' ];
 

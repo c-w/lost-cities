@@ -35,7 +35,6 @@ export function calculateScore(cards) {
 }
 
 const newTempScore = () => fromPairs(EXPEDITIONS.map(color => [color, 0]));
-const newScores = () => ({ [PLAYER_1]: 0, [PLAYER_2]: 0 });
 
 export const gameStateMachine = Machine(
   {
@@ -44,7 +43,8 @@ export const gameStateMachine = Machine(
     context: {
       gameRound: 1,
       activePlayer: PLAYER_1,
-      scores: newScores(),
+      player1Score: 0,
+      player2Score: 0,
       tempScore: newTempScore(),
     },
     states: {
@@ -98,7 +98,7 @@ export const gameStateMachine = Machine(
       },
       end: {
         entry: assign({ gameRound: null, activePlayer: null }),
-        exit: assign({ tempScore: newTempScore(), scores: newScores() }),
+        exit: assign({ tempScore: newTempScore(), player1Score: 0, player2Score: 0 }),
         on: {
           RESTART: { target: 'round1Player1' },
         },
@@ -113,11 +113,17 @@ export const gameStateMachine = Machine(
       setPlayer1: assign({ activePlayer: PLAYER_1 }),
       setPlayer2: assign({ activePlayer: PLAYER_2 }),
       setPlayerScore: assign({
-        scores: (context, _event) => {
-          const { activePlayer, scores, tempScore } = context;
-          const newScores = cloneDeep(scores);
-          newScores[activePlayer] += sum(Object.values(tempScore));
-          return newScores;
+        player1Score: (context, _event) => {
+          const { activePlayer, player1Score, tempScore } = context;
+          return activePlayer === PLAYER_1
+            ? player1Score + sum(Object.values(tempScore))
+            : player1Score;
+        },
+        player2Score: (context, _event) => {
+          const { activePlayer, player2Score, tempScore } = context;
+          return activePlayer === PLAYER_2
+            ? player2Score + sum(Object.values(tempScore))
+            : player2Score;
         },
         tempScore: newTempScore(),
       }),

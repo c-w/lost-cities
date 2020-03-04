@@ -50,7 +50,7 @@ function PlayerScore({ score, avatar, active }) {
   );
 }
 
-function TopBar({ gameRound, scores, activePlayer }) {
+function TopBar({ gameRound, player1Score, player2Score, activePlayer }) {
   const classes = useStyles();
 
   return (
@@ -59,8 +59,8 @@ function TopBar({ gameRound, scores, activePlayer }) {
         <Toolbar>
           <Title className={classes.title} />
           <GameRound gameRound={gameRound} />
-          <PlayerScore score={scores[PLAYER_1]} avatar={PLAYER_1} active={activePlayer === PLAYER_1} />
-          <PlayerScore score={scores[PLAYER_2]} avatar={PLAYER_2} active={activePlayer === PLAYER_2} />
+          <PlayerScore score={player1Score} avatar={PLAYER_1} active={activePlayer === PLAYER_1} />
+          <PlayerScore score={player2Score} avatar={PLAYER_2} active={activePlayer === PLAYER_2} />
         </Toolbar>
       </AppBar>
     </div>
