@@ -117,15 +117,19 @@ class Scorer extends PureComponent {
     this.props.onActionClick(sum(Object.values(this.state)));
 
   render() {
+    const spacing = 2;
+
     return (
       <Fragment>
-        <Grid container>
-          {EXPEDITIONS.map(color => (
-            <Grid key={color} item xs={12} sm={6}>
-              <ExpeditionPanel color={color} onChange={this.onScoreChange} />
-            </Grid>
-          ))}
-        </Grid>
+        <div style={{ padding: `${8 * spacing}px` }}>
+          <Grid container spacing={spacing}>
+            {EXPEDITIONS.map(color => (
+              <Grid key={color} item xs={12} sm={6}>
+                <ExpeditionPanel color={color} onChange={this.onScoreChange} />
+              </Grid>
+            ))}
+          </Grid>
+        </div>
         <ActionButton onClick={this.onActionClick} icon="check" label="Done" />
       </Fragment>
     );
