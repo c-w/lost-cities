@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "48f0d9d9edd3aa0606653c65c80469b4",
+    "revision": "79a092f8730690ca6ec2b6a2f8b11232",
     "url": "/lost-cities/index.html"
   },
   {
-    "revision": "4978032307ad64679672",
+    "revision": "e04d8b80a91cc501e049",
     "url": "/lost-cities/static/css/main.685dea8f.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/lost-cities/static/js/2.974c66b7.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "4978032307ad64679672",
-    "url": "/lost-cities/static/js/main.61ed6635.chunk.js"
+    "revision": "e04d8b80a91cc501e049",
+    "url": "/lost-cities/static/js/main.a3b650b2.chunk.js"
   },
   {
     "revision": "d8162e11fd4985f37bfc",
