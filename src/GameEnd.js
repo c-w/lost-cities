@@ -10,7 +10,7 @@ import ActionButton from './ActionButton';
 import { PLAYER_1, PLAYER_2 } from './game';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-function Highscore({ player1Score, player2Score, onActionClick }) {
+function GameEnd({ player1Score, player2Score, onActionClick }) {
   return (
     <Fragment>
       <TableContainer component={Paper}>
@@ -54,4 +54,4 @@ function Highscore({ player1Score, player2Score, onActionClick }) {
   );
 }
 
-export default Highscore;
+export default GameEnd;

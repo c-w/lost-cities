@@ -1,5 +1,5 @@
 import React, { Fragment, PureComponent } from 'react';
-import Highscore from './Highscore';
+import GameEnd from './GameEnd';
 import Scorer from './Scorer';
 import TopBar from './TopBar';
 import { gameStateMachine } from './game';
@@ -45,7 +45,7 @@ class App extends PureComponent {
           activePlayer={activePlayer}
         />
         {current.matches('highscore') ? (
-          <Highscore
+          <GameEnd
             player1Score={player1Score}
             player2Score={player2Score}
             onActionClick={this.onHighscoreClick}
