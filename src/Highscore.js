@@ -2,7 +2,6 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import ActionButton from './ActionButton';
 import { PLAYER_1, PLAYER_2 } from './game';
-import { faRedo } from '@fortawesome/free-solid-svg-icons/faRedo';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function Highscore({ player1Score, player2Score, onActionClick }) {
@@ -18,7 +17,7 @@ function Highscore({ player1Score, player2Score, onActionClick }) {
 
       <ActionButton
         onClick={onActionClick}
-        icon={faRedo}
+        icon="redo"
         label="Restart"
       />
     </React.Fragment>

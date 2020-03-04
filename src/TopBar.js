@@ -6,7 +6,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGamepad } from '@fortawesome/free-solid-svg-icons/faGamepad';
 import { PLAYER_1, PLAYER_2 } from './game';
 
 const useStyles = makeStyles(theme => ({
@@ -34,7 +33,7 @@ function GameRound({ gameRound }) {
   return (
     <Badge badgeContent={gameRound} color="secondary" aria-label="Game round" overlap="circle">
       <IconButton color="inherit" disabled={gameRound == null}>
-        <FontAwesomeIcon icon={faGamepad} />
+        <FontAwesomeIcon icon="gamepad" />
       </IconButton>
     </Badge>
   );

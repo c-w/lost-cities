@@ -7,12 +7,10 @@ import green from '@material-ui/core/colors/green';
 import grey from '@material-ui/core/colors/grey';
 import red from '@material-ui/core/colors/red';
 import yellow from '@material-ui/core/colors/yellow';
-import { faUserAstronaut } from '@fortawesome/free-solid-svg-icons/faUserAstronaut';
-import { faUserNinja } from '@fortawesome/free-solid-svg-icons/faUserNinja';
 import { Machine, assign } from 'xstate';
 
-export const PLAYER_1 = faUserAstronaut;
-export const PLAYER_2 = faUserNinja;
+export const PLAYER_1 = 'user-astronaut';
+export const PLAYER_2 = 'user-ninja';
 
 export const MULTIPLIERS = [-1, -2, -3];
 

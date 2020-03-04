@@ -9,9 +9,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import Typography from '@material-ui/core/Typography';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck';
-import { faCompass } from '@fortawesome/free-solid-svg-icons/faCompass';
-import { faHandshake } from '@fortawesome/free-solid-svg-icons/faHandshake';
 import ActionButton from './ActionButton';
 import { CARDS, EXPEDITIONS, calculateScore } from './game'
 
@@ -51,14 +48,14 @@ function Expedition({ color, onScoreChange }) {
       <div style={{ color }}>
         {card > 0
           ? <ListItemText primary={card} />
-          : <FontAwesomeIcon icon={faHandshake} />}
+          : <FontAwesomeIcon icon="handshake" />}
       </div>
     </MenuItem>
   );
 
   const renderValue = (cards) => (
     <Typography style={{ color }}>
-      <FontAwesomeIcon icon={faCompass} />
+      <FontAwesomeIcon icon="compass" />
       <span className={classes.score}>{calculateScore(cards) || null}</span>
     </Typography>
   );
@@ -94,7 +91,7 @@ function Scorer({ onScoreChange, onActionClick }) {
       </Grid>
       <ActionButton
         onClick={onActionClick}
-        icon={faCheck}
+        icon="check"
         label="Done"
       />
     </React.Fragment>
