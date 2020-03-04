@@ -1,82 +1,108 @@
-import React, { PureComponent, useState } from 'react';
+import React, { PureComponent } from 'react';
 import fromPairs from 'lodash.frompairs';
 import sum from 'lodash.sum';
-import makeStyles from '@material-ui/core/styles/makeStyles';
 import withStyles from '@material-ui/core/styles/withStyles';
-import Checkbox from '@material-ui/core/Checkbox';
-import Grid from '@material-ui/core/Grid';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import FormControl from '@material-ui/core/FormControl';
-import ListItemText from '@material-ui/core/ListItemText';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormGroup from '@material-ui/core/FormGroup';
+import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ActionButton from './ActionButton';
+import ControlledCheckbox from './ControlledCheckbox';
 import { CARDS, EXPEDITIONS, calculateScore, isMultiplier } from './game';
 
-const useStyles = makeStyles(theme => ({
-  formControl: {
-    margin: theme.spacing(1),
-    width: `calc(100% - ${theme.spacing(1) * 2}px)`,
-  },
-  score: {
-    marginLeft: theme.spacing(1),
-  },
-}));
+class ExpeditionCards extends PureComponent {
+  constructor(props) {
+    super(props);
 
-function Expedition({ color, onScoreChange }) {
-  const [cards, setCards] = useState([]);
-  const classes = useStyles();
+    this.state = fromPairs(CARDS.map(card => [card, false]));
 
-  const ColorCheckbox = withStyles({
-    root: {
-      color,
-      '&$checked': {
-        color,
+    this.ColorCheckbox = withStyles({
+      root: {
+        color: props.color,
+        '&$checked': {
+          color: props.color,
+        },
       },
-    },
-    checked: {},
-  })(props => <Checkbox color="default" {...props} />);
+      checked: {},
+    })(props => <ControlledCheckbox color="default" {...props} />);
+  }
 
-  const onChange = event => {
-    const cards = event.target.value;
-    setCards(cards);
-    onScoreChange({ color, score: calculateScore(cards) });
+  onChange = ({ data, checked }) => {
+    const { onChange } = this.props;
+
+    const newState = { ...this.state };
+    newState[data] = checked;
+
+    const cards = Object.entries(newState)
+      .filter(([_card, checked]) => checked)
+      .map(([card, _checked]) => parseInt(card, 10));
+
+    this.setState(newState, () => onChange(calculateScore(cards)));
   };
 
-  const renderItem = card => (
-    <MenuItem key={card} value={card}>
-      <ColorCheckbox checked={cards.indexOf(card) !== -1} />
-      <div style={{ color }}>
-        {isMultiplier(card) ? (
-          <FontAwesomeIcon icon="handshake" />
-        ) : (
-          <ListItemText primary={card} />
-        )}
-      </div>
-    </MenuItem>
-  );
+  render() {
+    const { color } = this.props;
 
-  const renderValue = cards => (
-    <Typography style={{ color }}>
-      <FontAwesomeIcon icon="compass" />
-      <span className={classes.score}>{calculateScore(cards) || null}</span>
-    </Typography>
-  );
+    return (
+      <FormControl component="fieldset">
+        <FormGroup>
+          {CARDS.map(card => (
+            <FormControlLabel
+              key={card}
+              control={
+                <this.ColorCheckbox data={card} onChange={this.onChange} />
+              }
+              label={
+                <div style={{ color }}>
+                  {isMultiplier(card) ? (
+                    <FontAwesomeIcon icon="handshake" />
+                  ) : (
+                    <Typography>{card}</Typography>
+                  )}
+                </div>
+              }
+            />
+          ))}
+        </FormGroup>
+      </FormControl>
+    );
+  }
+}
 
-  return (
-    <FormControl className={classes.formControl}>
-      <Select
-        displayEmpty
-        multiple
-        onChange={onChange}
-        renderValue={renderValue}
-        value={cards}
-      >
-        {CARDS.map(renderItem)}
-      </Select>
-    </FormControl>
-  );
+class ExpeditionPanel extends PureComponent {
+  state = {
+    score: null,
+  };
+
+  onChange = score => {
+    const { color, onChange } = this.props;
+
+    this.setState({ score }, () => onChange({ color, score }));
+  };
+
+  render() {
+    const { color } = this.props;
+    const { score } = this.state;
+
+    return (
+      <ExpansionPanel>
+        <ExpansionPanelSummary>
+          <Typography style={{ color }}>
+            <FontAwesomeIcon icon="compass" />
+            &nbsp;{score}
+          </Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+          <ExpeditionCards color={color} onChange={this.onChange} />
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
+    );
+  }
 }
 
 class Scorer extends PureComponent {
@@ -92,8 +118,8 @@ class Scorer extends PureComponent {
       <React.Fragment>
         <Grid container>
           {EXPEDITIONS.map(color => (
-            <Grid key={color} item xs={12} sm={4}>
-              <Expedition color={color} onScoreChange={this.onScoreChange} />
+            <Grid key={color} item xs={12} sm={6}>
+              <ExpeditionPanel color={color} onChange={this.onScoreChange} />
             </Grid>
           ))}
         </Grid>
