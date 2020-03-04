@@ -124,7 +124,7 @@ class Scorer extends PureComponent {
         <div style={{ padding: `${8 * spacing}px` }}>
           <Grid container spacing={spacing}>
             {EXPEDITIONS.map(color => (
-              <Grid key={color} item xs={12} sm={6}>
+              <Grid key={color} item xs={12} sm={6} lg>
                 <ExpeditionPanel color={color} onChange={this.onScoreChange} />
               </Grid>
             ))}
