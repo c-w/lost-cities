@@ -60,7 +60,7 @@ class ExpeditionCards extends PureComponent {
               label={
                 <div style={{ color }}>
                   {isMultiplier(card) ? (
-                    <FontAwesomeIcon icon="handshake" />
+                    <FontAwesomeIcon icon="handshake" aria-label="Investment" />
                   ) : (
                     <Typography>{card}</Typography>
                   )}
@@ -94,7 +94,10 @@ class ExpeditionPanel extends PureComponent {
         <ExpansionPanelSummary>
           <Typography style={{ color }}>
             <FontAwesomeIcon icon="compass" />
-            &nbsp;{score}
+            &nbsp;
+            <Typography variant="body1" component="span">
+              {score == null ? 'Click to start expedition' : `Score: ${score}`}
+            </Typography>
           </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>

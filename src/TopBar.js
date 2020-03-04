@@ -44,12 +44,12 @@ function GameRound({ className, gameRound }) {
   );
 }
 
-function PlayerScore({ score, avatar, active }) {
+function PlayerScore({ score, avatar, active, label }) {
   return (
     <Badge
       badgeContent={score}
       color="secondary"
-      aria-label="Player score"
+      aria-label={label}
       showZero
       overlap="circle"
     >
@@ -70,11 +70,21 @@ function TopBar({ gameRound, player1Score, player2Score, activePlayer }) {
           <Title className={classes.title} gameRound={gameRound} />
           <GameRound className={classes.gameRound} gameRound={gameRound} />
           <PlayerScore
+            label={
+              activePlayer === PLAYER_1
+                ? 'Player 1 score, active player'
+                : 'Player 1 score'
+            }
             score={player1Score}
             avatar={PLAYER_1}
             active={activePlayer === PLAYER_1}
           />
           <PlayerScore
+            label={
+              activePlayer === PLAYER_2
+                ? 'Player 2 score, active player'
+                : 'Player 2 score'
+            }
             score={player2Score}
             avatar={PLAYER_2}
             active={activePlayer === PLAYER_2}
