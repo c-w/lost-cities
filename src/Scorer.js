@@ -5,8 +5,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck';
 import { faCompass } from '@fortawesome/free-solid-svg-icons/faCompass';
 import { faHandshake } from '@fortawesome/free-solid-svg-icons/faHandshake';
+import ActionButton from './ActionButton';
 import { CARDS, EXPEDITIONS, calculateScore } from './game'
 
 class Expedition extends PureComponent {
@@ -29,8 +31,9 @@ class Expedition extends PureComponent {
   onChange = event => {
     const { color, onScoreChange } = this.props;
     const cards = event.target.value;
+    const score = calculateScore(cards);
 
-    this.setState({ cards }, () => onScoreChange(color, calculateScore(cards)));
+    this.setState({ cards }, () => onScoreChange({ color, score }));
   };
 
   renderItem = card => {
@@ -77,7 +80,7 @@ class Expedition extends PureComponent {
   };
 }
 
-function Scorer({ onScoreChange }) {
+function Scorer({ onScoreChange, onActionClick }) {
   return (
     <React.Fragment>
       {EXPEDITIONS.map(color =>
@@ -87,6 +90,11 @@ function Scorer({ onScoreChange }) {
           onScoreChange={onScoreChange}
         />
       )}
+      <ActionButton
+        onClick={onActionClick}
+        icon={faCheck}
+        label="Done"
+      />
     </React.Fragment>
   );
 }

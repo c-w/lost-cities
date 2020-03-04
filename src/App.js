@@ -1,31 +1,34 @@
-import React, { useState } from 'react';
-import sum from 'lodash.sum';
-import NextButton from './NextButton';
+import React from 'react';
+import Highscore from './Highscore';
 import Scorer from './Scorer';
 import TopBar from './TopBar';
+import { gameStateMachine } from './game';
+import { useMachine } from '@xstate/react';
 
 function App() {
-  const [gameRound, setGameRound] = useState(0);
-  const [scores, setScores] = useState({0: {}, 1: {}});
-
-  const onScoreChange = (color, score) => {
-    const player = gameRound % 2;
-    const playerScores = scores[player];
-    setScores({ ...scores, [player]: { ...playerScores, [color]: score }});
-  };
+  const [ state, send ] = useMachine(gameStateMachine);
+  const { activePlayer, gameRound, scores } = state.context;
 
   return (
     <React.Fragment>
       <TopBar
         gameRound={gameRound}
-        player1Score={sum(Object.values(scores[0]))}
-        player2Score={sum(Object.values(scores[1]))}
+        scores={scores}
+        activePlayer={activePlayer}
       />
-      <Scorer
-        key={gameRound}
-        onScoreChange={onScoreChange}
-      />
-      <NextButton onClick={() => setGameRound(gameRound + 1)} />
+      {state.matches('end')
+        ?
+          <Highscore
+            scores={scores}
+            onActionClick={() => send('RESTART')}
+          />
+        :
+          <Scorer
+            key={state.value}
+            onScoreChange={payload => send({ type: 'SCORE', payload })}
+            onActionClick={() => send('DONE')}
+          />
+      }
     </React.Fragment>
   );
 }

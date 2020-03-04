@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGamepad } from '@fortawesome/free-solid-svg-icons/faGamepad';
 import { faUserAstronaut } from '@fortawesome/free-solid-svg-icons/faUserAstronaut';
 import { faUserNinja } from '@fortawesome/free-solid-svg-icons/faUserNinja';
+import { PLAYER_1, PLAYER_2 } from './game';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,25 +30,25 @@ function Title({ className }) {
 
 function GameRound({ gameRound }) {
   return (
-    <Badge badgeContent={gameRound + 1} color="secondary" aria-label="Game round">
-      <IconButton color="inherit">
+    <Badge badgeContent={gameRound} color="secondary" aria-label="Game round">
+      <IconButton color="inherit" disabled={gameRound == null}>
         <FontAwesomeIcon icon={faGamepad} />
       </IconButton>
     </Badge>
   );
 }
 
-function PlayerScore({ score, avatar }) {
+function PlayerScore({ score, avatar, active }) {
   return (
     <Badge badgeContent={score} color="secondary" aria-label="Player score">
-      <IconButton color="inherit">
+      <IconButton color="inherit" disabled={!active}>
         <FontAwesomeIcon icon={avatar} />
       </IconButton>
     </Badge>
   );
 }
 
-function TopBar({ gameRound, player1Score, player2Score }) {
+function TopBar({ gameRound, scores, activePlayer }) {
   const classes = useStyles();
 
   return (
@@ -56,8 +57,8 @@ function TopBar({ gameRound, player1Score, player2Score }) {
         <Toolbar>
           <Title className={classes.title} />
           <GameRound gameRound={gameRound} />
-          <PlayerScore score={player1Score} avatar={faUserAstronaut} />
-          <PlayerScore score={player2Score} avatar={faUserNinja} />
+          <PlayerScore score={scores[PLAYER_1]} avatar={faUserAstronaut} active={activePlayer === PLAYER_1} />
+          <PlayerScore score={scores[PLAYER_2]} avatar={faUserNinja} active={activePlayer === PLAYER_2} />
         </Toolbar>
       </AppBar>
     </div>

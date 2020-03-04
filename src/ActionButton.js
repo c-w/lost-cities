@@ -2,7 +2,6 @@ import React from 'react';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import Fab from '@material-ui/core/Fab';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck';
 
 const useStyles = makeStyles(theme => ({
   fab: {
@@ -12,19 +11,19 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function NextButton({ onClick }) {
+function ActionButton({ onClick, label, icon }) {
   const classes = useStyles();
 
   return (
     <Fab
       color="primary"
-      aria-label="Next round"
+      aria-label={label}
       className={classes.fab}
       onClick={onClick}
     >
-      <FontAwesomeIcon icon={faCheck} />
+      <FontAwesomeIcon icon={icon} />
     </Fab>
   );
 }
 
-export default NextButton;
+export default ActionButton;
