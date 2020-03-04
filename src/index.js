@@ -7,6 +7,7 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck';
 import { faCompass } from '@fortawesome/free-solid-svg-icons/faCompass';
 import { faHandshake } from '@fortawesome/free-solid-svg-icons/faHandshake';
 import { faRedo } from '@fortawesome/free-solid-svg-icons/faRedo';
+import { faTrophy } from '@fortawesome/free-solid-svg-icons/faTrophy';
 import { faUserAstronaut } from '@fortawesome/free-solid-svg-icons/faUserAstronaut';
 import { faUserNinja } from '@fortawesome/free-solid-svg-icons/faUserNinja';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -16,6 +17,7 @@ library.add(
   faCompass,
   faHandshake,
   faRedo,
+  faTrophy,
   faUserAstronaut,
   faUserNinja
 );

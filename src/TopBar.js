@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Badge from '@material-ui/core/Badge';
 import IconButton from '@material-ui/core/IconButton';
@@ -33,10 +33,6 @@ function Title({ className }) {
 }
 
 function GameRound({ className, gameRound }) {
-  if (gameRound == null) {
-    return null;
-  }
-
   return (
     <Typography variant="subtitle1" component="span" className={className}>
       Round {gameRound}
@@ -68,27 +64,31 @@ function TopBar({ gameRound, player1Score, player2Score, activePlayer }) {
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
           <Title className={classes.title} gameRound={gameRound} />
-          <GameRound className={classes.gameRound} gameRound={gameRound} />
-          <PlayerScore
-            label={
-              activePlayer === PLAYER_1
-                ? 'Player 1 score, active player'
-                : 'Player 1 score'
-            }
-            score={player1Score}
-            avatar={PLAYER_1}
-            active={activePlayer === PLAYER_1}
-          />
-          <PlayerScore
-            label={
-              activePlayer === PLAYER_2
-                ? 'Player 2 score, active player'
-                : 'Player 2 score'
-            }
-            score={player2Score}
-            avatar={PLAYER_2}
-            active={activePlayer === PLAYER_2}
-          />
+          {gameRound != null && (
+            <Fragment>
+              <GameRound className={classes.gameRound} gameRound={gameRound} />
+              <PlayerScore
+                label={
+                  activePlayer === PLAYER_1
+                    ? 'Player 1 score, active player'
+                    : 'Player 1 score'
+                }
+                score={player1Score}
+                avatar={PLAYER_1}
+                active={activePlayer === PLAYER_1}
+              />
+              <PlayerScore
+                label={
+                  activePlayer === PLAYER_2
+                    ? 'Player 2 score, active player'
+                    : 'Player 2 score'
+                }
+                score={player2Score}
+                avatar={PLAYER_2}
+                active={activePlayer === PLAYER_2}
+              />
+            </Fragment>
+          )}
         </Toolbar>
       </AppBar>
     </div>
