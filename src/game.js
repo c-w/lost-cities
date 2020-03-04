@@ -1,5 +1,3 @@
-import cloneDeep from 'lodash.clonedeep';
-import fromPairs from 'lodash.frompairs';
 import partition from 'lodash.partition';
 import sum from 'lodash.sum';
 import blue from '@material-ui/core/colors/blue';
@@ -42,8 +40,6 @@ export function calculateScore(cards) {
   return score * multiplier + lengthBonus;
 }
 
-const newTempScore = () => fromPairs(EXPEDITIONS.map(color => [color, 0]));
-
 export const gameStateMachine = Machine(
   {
     id: 'game',
@@ -53,61 +49,47 @@ export const gameStateMachine = Machine(
       activePlayer: PLAYER_1,
       player1Score: 0,
       player2Score: 0,
-      tempScore: newTempScore(),
     },
     states: {
       round1Player1: {
         entry: ['setRound1', 'setPlayer1'],
-        exit: ['setPlayerScore'],
         on: {
-          SCORE: { actions: ['score'] },
-          DONE: { target: 'round1Player2' },
+          DONE: { target: 'round1Player2', actions: ['setPlayer1Score'] },
         },
       },
       round1Player2: {
         entry: ['setRound1', 'setPlayer2'],
-        exit: ['setPlayerScore'],
         on: {
-          SCORE: { actions: ['score'] },
-          DONE: { target: 'round2Player1' },
+          DONE: { target: 'round2Player1', actions: ['setPlayer2Score'] },
         },
       },
       round2Player1: {
         entry: ['setRound2', 'setPlayer1'],
-        exit: ['setPlayerScore'],
         on: {
-          SCORE: { actions: ['score'] },
-          DONE: { target: 'round2Player2' },
+          DONE: { target: 'round2Player2', actions: ['setPlayer1Score'] },
         },
       },
       round2Player2: {
         entry: ['setRound2', 'setPlayer2'],
-        exit: ['setPlayerScore'],
         on: {
-          SCORE: { actions: ['score'] },
-          DONE: { target: 'round3Player1' },
+          DONE: { target: 'round3Player1', actions: ['setPlayer2Score'] },
         },
       },
       round3Player1: {
         entry: ['setRound3', 'setPlayer1'],
-        exit: ['setPlayerScore'],
         on: {
-          SCORE: { actions: ['score'] },
-          DONE: { target: 'round3Player2' },
+          DONE: { target: 'round3Player2', actions: ['setPlayer1Score'] },
         },
       },
       round3Player2: {
         entry: ['setRound3', 'setPlayer2'],
-        exit: ['setPlayerScore'],
         on: {
-          SCORE: { actions: ['score'] },
-          DONE: { target: 'highscore' },
+          DONE: { target: 'highscore', actions: ['setPlayer2Score'] },
         },
       },
       highscore: {
         entry: assign({ gameRound: null, activePlayer: null }),
         exit: assign({
-          tempScore: newTempScore(),
           player1Score: 0,
           player2Score: 0,
         }),
@@ -124,29 +106,11 @@ export const gameStateMachine = Machine(
       setRound3: assign({ gameRound: 3 }),
       setPlayer1: assign({ activePlayer: PLAYER_1 }),
       setPlayer2: assign({ activePlayer: PLAYER_2 }),
-      setPlayerScore: assign({
-        player1Score: (context, _event) => {
-          const { activePlayer, player1Score, tempScore } = context;
-          return activePlayer === PLAYER_1
-            ? player1Score + sum(Object.values(tempScore))
-            : player1Score;
-        },
-        player2Score: (context, _event) => {
-          const { activePlayer, player2Score, tempScore } = context;
-          return activePlayer === PLAYER_2
-            ? player2Score + sum(Object.values(tempScore))
-            : player2Score;
-        },
-        tempScore: newTempScore(),
+      setPlayer1Score: assign({
+        player1Score: (context, event) => context.player1Score + event.payload,
       }),
-      score: assign({
-        tempScore: (context, event) => {
-          const { tempScore } = context;
-          const { color, score } = event.payload;
-          const newTempScore = cloneDeep(tempScore);
-          newTempScore[color] = score;
-          return newTempScore;
-        },
+      setPlayer2Score: assign({
+        player2Score: (context, event) => context.player2Score + event.payload,
       }),
     },
   }

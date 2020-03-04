@@ -22,9 +22,9 @@ class App extends PureComponent {
     this.service.stop();
   }
 
-  onScoreChange = payload => this.service.send({ type: 'SCORE', payload });
-  onScorerActionClick = () => this.service.send('DONE');
-  onHighscoreActionClick = () => this.service.send('RESTART');
+  onScorerClick = payload => this.service.send({ type: 'DONE', payload });
+
+  onHighscoreClick = payload => this.service.send({ type: 'RESTART', payload });
 
   render() {
     const { current } = this.state;
@@ -48,14 +48,10 @@ class App extends PureComponent {
           <Highscore
             player1Score={player1Score}
             player2Score={player2Score}
-            onActionClick={this.onHighscoreActionClick}
+            onActionClick={this.onHighscoreClick}
           />
         ) : (
-          <Scorer
-            key={current.value}
-            onScoreChange={this.onScoreChange}
-            onActionClick={this.onScorerActionClick}
-          />
+          <Scorer key={current.value} onActionClick={this.onScorerClick} />
         )}
       </React.Fragment>
     );

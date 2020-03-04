@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { PureComponent, useState } from 'react';
+import fromPairs from 'lodash.frompairs';
+import sum from 'lodash.sum';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -77,19 +79,28 @@ function Expedition({ color, onScoreChange }) {
   );
 }
 
-function Scorer({ onScoreChange, onActionClick }) {
-  return (
-    <React.Fragment>
-      <Grid container>
-        {EXPEDITIONS.map(color => (
-          <Grid key={color} item xs={12} sm={4}>
-            <Expedition color={color} onScoreChange={onScoreChange} />
-          </Grid>
-        ))}
-      </Grid>
-      <ActionButton onClick={onActionClick} icon="check" label="Done" />
-    </React.Fragment>
-  );
+class Scorer extends PureComponent {
+  state = fromPairs(EXPEDITIONS.map(color => [color, 0]));
+
+  onScoreChange = ({ color, score }) => this.setState({ [color]: score });
+
+  onActionClick = () =>
+    this.props.onActionClick(sum(Object.values(this.state)));
+
+  render() {
+    return (
+      <React.Fragment>
+        <Grid container>
+          {EXPEDITIONS.map(color => (
+            <Grid key={color} item xs={12} sm={4}>
+              <Expedition color={color} onScoreChange={this.onScoreChange} />
+            </Grid>
+          ))}
+        </Grid>
+        <ActionButton onClick={this.onActionClick} icon="check" label="Done" />
+      </React.Fragment>
+    );
+  }
 }
 
 export default Scorer;
