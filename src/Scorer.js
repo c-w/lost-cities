@@ -1,6 +1,8 @@
-import React, { PureComponent } from 'react';
+import React, { useState } from 'react';
+import makeStyles from '@material-ui/core/styles/makeStyles';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Checkbox from '@material-ui/core/Checkbox';
+import FormControl from '@material-ui/core/FormControl';
 import ListItemText from '@material-ui/core/ListItemText';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
@@ -11,73 +13,64 @@ import { faHandshake } from '@fortawesome/free-solid-svg-icons/faHandshake';
 import ActionButton from './ActionButton';
 import { CARDS, EXPEDITIONS, calculateScore } from './game'
 
-class Expedition extends PureComponent {
-  state = { cards: [] };
+const useStyles = makeStyles(theme => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+}));
 
-  get Checkbox() {
-    const { color } = this.props;
+function Expedition({ color, onScoreChange }) {
+  const [ cards, setCards ] = useState([]);
+  const classes = useStyles();
 
-    return withStyles({
-      root: {
+  const ColorCheckbox = withStyles({
+    root: {
+      color,
+      '&$checked': {
         color,
-        '&$checked': {
-          color,
-        },
       },
-      checked: {},
-    })(props => <Checkbox color="default" {...props} />);
-  }
+    },
+    checked: {},
+  })(props => <Checkbox color="default" {...props} />);
 
-  onChange = event => {
-    const { color, onScoreChange } = this.props;
+  const onChange = event => {
     const cards = event.target.value;
-    const score = calculateScore(cards);
-
-    this.setState({ cards }, () => onScoreChange({ color, score }));
+    setCards(cards);
+    onScoreChange({ color, score: calculateScore(cards) });
   };
 
-  renderItem = card => {
-    const { color } = this.props;
-    const { cards } = this.state;
-
-    return (
-      <MenuItem key={card} value={card}>
-        <this.Checkbox checked={cards.indexOf(card) !== -1} />
-        <div style={{ color }}>
-          {card > 0
-            ? <ListItemText primary={card} />
-            : <FontAwesomeIcon icon={faHandshake} />}
-        </div>
-      </MenuItem>
-    );
-  };
-
-  renderValue = (cards) => {
-    const { color } = this.props;
-
-    return (
+  const renderItem = card => (
+    <MenuItem key={card} value={card}>
+      <ColorCheckbox checked={cards.indexOf(card) !== -1} />
       <div style={{ color }}>
-        <FontAwesomeIcon icon={faCompass} />
-        {calculateScore(cards) || null}
+        {card > 0
+          ? <ListItemText primary={card} />
+          : <FontAwesomeIcon icon={faHandshake} />}
       </div>
-    );
-  };
+    </MenuItem>
+  );
 
-  render() {
-    const { cards } = this.state;
+  const renderValue = (cards) => (
+    <div style={{ color }}>
+      <FontAwesomeIcon icon={faCompass} />
+      {calculateScore(cards) || null}
+    </div>
+  );
 
-    return (
+  return (
+    <FormControl className={classes.formControl}>
       <Select
         displayEmpty
         multiple
-        onChange={this.onChange}
-        renderValue={this.renderValue}
+        onChange={onChange}
+        renderValue={renderValue}
         value={cards}
       >
-        {CARDS.map(this.renderItem)}
+        {CARDS.map(renderItem)}
       </Select>
-    );
-  };
+    </FormControl>
+  );
 }
 
 function Scorer({ onScoreChange, onActionClick }) {
