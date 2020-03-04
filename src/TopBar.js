@@ -7,8 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGamepad } from '@fortawesome/free-solid-svg-icons/faGamepad';
-import { faUserAstronaut } from '@fortawesome/free-solid-svg-icons/faUserAstronaut';
-import { faUserNinja } from '@fortawesome/free-solid-svg-icons/faUserNinja';
 import { PLAYER_1, PLAYER_2 } from './game';
 
 const useStyles = makeStyles(theme => ({
@@ -61,8 +59,8 @@ function TopBar({ gameRound, scores, activePlayer }) {
         <Toolbar>
           <Title className={classes.title} />
           <GameRound gameRound={gameRound} />
-          <PlayerScore score={scores[PLAYER_1]} avatar={faUserAstronaut} active={activePlayer === PLAYER_1} />
-          <PlayerScore score={scores[PLAYER_2]} avatar={faUserNinja} active={activePlayer === PLAYER_2} />
+          <PlayerScore score={scores[PLAYER_1]} avatar={PLAYER_1} active={activePlayer === PLAYER_1} />
+          <PlayerScore score={scores[PLAYER_2]} avatar={PLAYER_2} active={activePlayer === PLAYER_2} />
         </Toolbar>
       </AppBar>
     </div>

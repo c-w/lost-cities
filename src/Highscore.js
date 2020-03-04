@@ -3,15 +3,17 @@ import Typography from '@material-ui/core/Typography';
 import ActionButton from './ActionButton';
 import { PLAYER_1, PLAYER_2 } from './game';
 import { faRedo } from '@fortawesome/free-solid-svg-icons/faRedo';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function Highscore({ scores, onActionClick }) {
+  const [ winner, label ] = scores[PLAYER_1] > scores[PLAYER_2]
+    ? [ PLAYER_1, 'Player 1' ]
+    : [ PLAYER_2, 'Player 2' ];
+
   return (
     <React.Fragment>
       <Typography align="center" display="block">
-        {scores[PLAYER_1] > scores[PLAYER_2]
-          ? `${PLAYER_1} wins`
-          : `${PLAYER_2} wins`
-        }
+        <FontAwesomeIcon icon={winner} aria-label={label} />&nbsp;wins
       </Typography>
 
       <ActionButton
