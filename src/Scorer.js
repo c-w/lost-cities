@@ -49,7 +49,7 @@ class ExpeditionCards extends PureComponent {
     const { color } = this.props;
 
     return (
-      <FormControl component="fieldset">
+      <FormControl component="fieldset" style={{ width: '100%' }}>
         <FormGroup>
           {CARDS.map(card => (
             <FormControlLabel
