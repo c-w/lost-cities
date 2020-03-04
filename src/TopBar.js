@@ -47,6 +47,7 @@ function PlayerScore({ score, avatar, active, label }) {
       color="secondary"
       aria-label={label}
       showZero
+      max={999}
       overlap="circle"
     >
       <IconButton color="inherit" disabled={!active}>
