@@ -12,18 +12,28 @@ import { Machine, assign } from 'xstate';
 export const PLAYER_1 = 'user-astronaut';
 export const PLAYER_2 = 'user-ninja';
 
-export const MULTIPLIERS = [-1, -2, -3];
+const MULTIPLIERS = [-1, -2, -3];
+
+export function isMultiplier(card) {
+  return MULTIPLIERS.indexOf(card) !== -1;
+}
 
 export const CARDS = [...MULTIPLIERS, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-export const EXPEDITIONS = [yellow[800], blue[500], grey[500], green[500], red[500]];
+export const EXPEDITIONS = [
+  yellow[800],
+  blue[500],
+  grey[500],
+  green[500],
+  red[500],
+];
 
 export function calculateScore(cards) {
   if (cards.length === 0) {
     return 0;
   }
 
-  const [numbers, multipliers] = partition(cards, card => MULTIPLIERS.indexOf(card) === -1);
+  const [multipliers, numbers] = partition(cards, isMultiplier);
 
   const score = sum(numbers) - 20;
   const multiplier = multipliers.length + 1;
@@ -91,12 +101,16 @@ export const gameStateMachine = Machine(
         exit: ['setPlayerScore'],
         on: {
           SCORE: { actions: ['score'] },
-          DONE: { target: 'end' },
+          DONE: { target: 'highscore' },
         },
       },
-      end: {
+      highscore: {
         entry: assign({ gameRound: null, activePlayer: null }),
-        exit: assign({ tempScore: newTempScore(), player1Score: 0, player2Score: 0 }),
+        exit: assign({
+          tempScore: newTempScore(),
+          player1Score: 0,
+          player2Score: 0,
+        }),
         on: {
           RESTART: { target: 'round1Player1' },
         },
@@ -135,5 +149,5 @@ export const gameStateMachine = Machine(
         },
       }),
     },
-  },
+  }
 );

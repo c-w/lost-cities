@@ -6,7 +6,7 @@ import { gameStateMachine } from './game';
 import { useMachine } from '@xstate/react';
 
 function App() {
-  const [ state, send ] = useMachine(gameStateMachine);
+  const [state, send] = useMachine(gameStateMachine);
   const { activePlayer, gameRound, player1Score, player2Score } = state.context;
 
   return (
@@ -17,20 +17,19 @@ function App() {
         player2Score={player2Score}
         activePlayer={activePlayer}
       />
-      {state.matches('end')
-        ?
-          <Highscore
-            player1Score={player1Score}
-            player2Score={player2Score}
-            onActionClick={() => send('RESTART')}
-          />
-        :
-          <Scorer
-            key={state.value}
-            onScoreChange={payload => send({ type: 'SCORE', payload })}
-            onActionClick={() => send('DONE')}
-          />
-      }
+      {state.matches('highscore') ? (
+        <Highscore
+          player1Score={player1Score}
+          player2Score={player2Score}
+          onActionClick={() => send('RESTART')}
+        />
+      ) : (
+        <Scorer
+          key={state.value}
+          onScoreChange={payload => send({ type: 'SCORE', payload })}
+          onActionClick={() => send('DONE')}
+        />
+      )}
     </React.Fragment>
   );
 }

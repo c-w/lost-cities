@@ -10,7 +10,7 @@ import { faHandshake } from '@fortawesome/free-solid-svg-icons/faHandshake';
 import { faRedo } from '@fortawesome/free-solid-svg-icons/faRedo';
 import { faUserAstronaut } from '@fortawesome/free-solid-svg-icons/faUserAstronaut';
 import { faUserNinja } from '@fortawesome/free-solid-svg-icons/faUserNinja';
-import { library } from '@fortawesome/fontawesome-svg-core'
+import { library } from '@fortawesome/fontawesome-svg-core';
 
 library.add(
   faCheck,

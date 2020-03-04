@@ -31,7 +31,12 @@ function Title({ className }) {
 
 function GameRound({ gameRound }) {
   return (
-    <Badge badgeContent={gameRound} color="secondary" aria-label="Game round" overlap="circle">
+    <Badge
+      badgeContent={gameRound}
+      color="secondary"
+      aria-label="Game round"
+      overlap="circle"
+    >
       <IconButton color="inherit" disabled={gameRound == null}>
         <FontAwesomeIcon icon="gamepad" />
       </IconButton>
@@ -41,7 +46,13 @@ function GameRound({ gameRound }) {
 
 function PlayerScore({ score, avatar, active }) {
   return (
-    <Badge badgeContent={score} color="secondary" aria-label="Player score" showZero overlap="circle">
+    <Badge
+      badgeContent={score}
+      color="secondary"
+      aria-label="Player score"
+      showZero
+      overlap="circle"
+    >
       <IconButton color="inherit" disabled={!active}>
         <FontAwesomeIcon icon={avatar} />
       </IconButton>
@@ -58,8 +69,16 @@ function TopBar({ gameRound, player1Score, player2Score, activePlayer }) {
         <Toolbar>
           <Title className={classes.title} />
           <GameRound gameRound={gameRound} />
-          <PlayerScore score={player1Score} avatar={PLAYER_1} active={activePlayer === PLAYER_1} />
-          <PlayerScore score={player2Score} avatar={PLAYER_2} active={activePlayer === PLAYER_2} />
+          <PlayerScore
+            score={player1Score}
+            avatar={PLAYER_1}
+            active={activePlayer === PLAYER_1}
+          />
+          <PlayerScore
+            score={player2Score}
+            avatar={PLAYER_2}
+            active={activePlayer === PLAYER_2}
+          />
         </Toolbar>
       </AppBar>
     </div>

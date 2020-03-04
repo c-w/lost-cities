@@ -10,7 +10,7 @@ import Select from '@material-ui/core/Select';
 import Typography from '@material-ui/core/Typography';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ActionButton from './ActionButton';
-import { CARDS, EXPEDITIONS, calculateScore } from './game'
+import { CARDS, EXPEDITIONS, calculateScore, isMultiplier } from './game';
 
 const useStyles = makeStyles(theme => ({
   formControl: {
@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function Expedition({ color, onScoreChange }) {
-  const [ cards, setCards ] = useState([]);
+  const [cards, setCards] = useState([]);
   const classes = useStyles();
 
   const ColorCheckbox = withStyles({
@@ -46,14 +46,16 @@ function Expedition({ color, onScoreChange }) {
     <MenuItem key={card} value={card}>
       <ColorCheckbox checked={cards.indexOf(card) !== -1} />
       <div style={{ color }}>
-        {card > 0
-          ? <ListItemText primary={card} />
-          : <FontAwesomeIcon icon="handshake" />}
+        {isMultiplier(card) ? (
+          <FontAwesomeIcon icon="handshake" />
+        ) : (
+          <ListItemText primary={card} />
+        )}
       </div>
     </MenuItem>
   );
 
-  const renderValue = (cards) => (
+  const renderValue = cards => (
     <Typography style={{ color }}>
       <FontAwesomeIcon icon="compass" />
       <span className={classes.score}>{calculateScore(cards) || null}</span>
@@ -79,7 +81,7 @@ function Scorer({ onScoreChange, onActionClick }) {
   return (
     <React.Fragment>
       <Grid container>
-        {EXPEDITIONS.map(color =>
+        {EXPEDITIONS.map(color => (
           <Grid item xs={12} sm={4}>
             <Expedition
               key={color}
@@ -87,13 +89,9 @@ function Scorer({ onScoreChange, onActionClick }) {
               onScoreChange={onScoreChange}
             />
           </Grid>
-        )}
+        ))}
       </Grid>
-      <ActionButton
-        onClick={onActionClick}
-        icon="check"
-        label="Done"
-      />
+      <ActionButton onClick={onActionClick} icon="check" label="Done" />
     </React.Fragment>
   );
 }
