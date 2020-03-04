@@ -6,6 +6,7 @@ import FormControl from '@material-ui/core/FormControl';
 import ListItemText from '@material-ui/core/ListItemText';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
+import Typography from '@material-ui/core/Typography';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck';
 import { faCompass } from '@fortawesome/free-solid-svg-icons/faCompass';
@@ -17,6 +18,9 @@ const useStyles = makeStyles(theme => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
+  },
+  score: {
+    marginLeft: theme.spacing(1),
   },
 }));
 
@@ -52,10 +56,10 @@ function Expedition({ color, onScoreChange }) {
   );
 
   const renderValue = (cards) => (
-    <div style={{ color }}>
+    <Typography style={{ color }}>
       <FontAwesomeIcon icon={faCompass} />
-      {calculateScore(cards) || null}
-    </div>
+      <span className={classes.score}>{calculateScore(cards) || null}</span>
+    </Typography>
   );
 
   return (
