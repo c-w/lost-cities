@@ -82,12 +82,8 @@ function Scorer({ onScoreChange, onActionClick }) {
     <React.Fragment>
       <Grid container>
         {EXPEDITIONS.map(color => (
-          <Grid item xs={12} sm={4}>
-            <Expedition
-              key={color}
-              color={color}
-              onScoreChange={onScoreChange}
-            />
+          <Grid key={color} item xs={12} sm={4}>
+            <Expedition color={color} onScoreChange={onScoreChange} />
           </Grid>
         ))}
       </Grid>
