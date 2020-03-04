@@ -20,7 +20,7 @@
     "build": "react-scripts build",
     "lint": "eslint src --max-warnings=0",
     "test": "react-scripts test",
-    "predeploy": "cross-env NODE_ENV=production yarn build",
+    "predeploy": "cross-env NODE_ENV=production REACT_APP_BUILD_URL=\"$CIRCLE_BUILD_URL\" yarn build",
     "deploy": "gh-pages -d build -u \"Circle CI <circle@circleci.com>\" -x -r \"https://$GITHUB_TOKEN@github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME\" -m \"Build $CIRCLE_BUILD_NUM [ci skip]\"",
     "eject": "react-scripts eject"
   },
