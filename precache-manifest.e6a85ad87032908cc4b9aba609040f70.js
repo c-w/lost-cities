@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "79a092f8730690ca6ec2b6a2f8b11232",
+    "revision": "bec6e4b090f53fa3391d3afb83b8c8e0",
     "url": "/lost-cities/index.html"
   },
   {
