@@ -5,7 +5,6 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck';
 import { faCompass } from '@fortawesome/free-solid-svg-icons/faCompass';
-import { faGamepad } from '@fortawesome/free-solid-svg-icons/faGamepad';
 import { faHandshake } from '@fortawesome/free-solid-svg-icons/faHandshake';
 import { faRedo } from '@fortawesome/free-solid-svg-icons/faRedo';
 import { faUserAstronaut } from '@fortawesome/free-solid-svg-icons/faUserAstronaut';
@@ -15,7 +14,6 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 library.add(
   faCheck,
   faCompass,
-  faGamepad,
   faHandshake,
   faRedo,
   faUserAstronaut,

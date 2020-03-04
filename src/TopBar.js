@@ -19,28 +19,28 @@ const useStyles = makeStyles(theme => ({
   title: {
     flexGrow: 1,
   },
+  gameRound: {
+    flexGrow: 1,
+  },
 }));
 
 function Title({ className }) {
   return (
-    <Typography variant="h6" className={className}>
+    <Typography variant="h6" component="h1" className={className}>
       Lost Cities
     </Typography>
   );
 }
 
-function GameRound({ gameRound }) {
+function GameRound({ className, gameRound }) {
+  if (gameRound == null) {
+    return null;
+  }
+
   return (
-    <Badge
-      badgeContent={gameRound}
-      color="secondary"
-      aria-label="Game round"
-      overlap="circle"
-    >
-      <IconButton color="inherit" disabled={gameRound == null}>
-        <FontAwesomeIcon icon="gamepad" />
-      </IconButton>
-    </Badge>
+    <Typography variant="subtitle1" component="span" className={className}>
+      Round {gameRound}
+    </Typography>
   );
 }
 
@@ -67,8 +67,8 @@ function TopBar({ gameRound, player1Score, player2Score, activePlayer }) {
     <div className={classes.root}>
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
-          <Title className={classes.title} />
-          <GameRound gameRound={gameRound} />
+          <Title className={classes.title} gameRound={gameRound} />
+          <GameRound className={classes.gameRound} gameRound={gameRound} />
           <PlayerScore
             score={player1Score}
             avatar={PLAYER_1}
