@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/c-w/lost-cities.svg?style=svg)](https://circleci.com/gh/c-w/lost-cities)
+
 # Lost Cities Scoring App
 
 ## What's this?

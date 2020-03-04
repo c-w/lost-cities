@@ -1,0 +1,35 @@
+version: 2
+jobs:
+  lint:
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - checkout
+      - run: yarn install
+      - run: yarn run lint
+  deploy:
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - checkout
+      - run: yarn install
+      - run: yarn run deploy
+
+workflows:
+  version: 2
+  lint-deploy:
+    jobs:
+      - lint:
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              only: /.*/
+      - deploy:
+          requires:
+            - lint
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore: /.*/

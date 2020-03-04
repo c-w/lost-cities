@@ -2,6 +2,7 @@
   "name": "lost-cities",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://justamouse.com/lost-cities",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.27",
     "@fortawesome/free-solid-svg-icons": "^5.12.1",
@@ -19,6 +20,8 @@
     "build": "react-scripts build",
     "lint": "eslint src --max-warnings=0",
     "test": "react-scripts test",
+    "predeploy": "cross-env NODE_ENV=production yarn build",
+    "deploy": "gh-pages -d build -u \"Circle CI <circle@circleci.com>\" -x -r \"https://$GITHUB_TOKEN@github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME\" -m \"Build $CIRCLE_BUILD_NUM [ci skip]\"",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -47,9 +50,11 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "cross-env": "^7.0.1",
     "eslint": "^6.6.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-prettier": "^3.1.2",
+    "gh-pages": "^2.2.0",
     "prettier": "^1.19.1",
     "react-scripts": "3.4.0"
   }
