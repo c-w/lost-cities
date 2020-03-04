@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Checkbox from '@material-ui/core/Checkbox';
+import Grid from '@material-ui/core/Grid';
 import FormControl from '@material-ui/core/FormControl';
 import ListItemText from '@material-ui/core/ListItemText';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -17,7 +18,7 @@ import { CARDS, EXPEDITIONS, calculateScore } from './game'
 const useStyles = makeStyles(theme => ({
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 120,
+    width: `calc(100% - ${theme.spacing(1) * 2}px)`,
   },
   score: {
     marginLeft: theme.spacing(1),
@@ -80,13 +81,17 @@ function Expedition({ color, onScoreChange }) {
 function Scorer({ onScoreChange, onActionClick }) {
   return (
     <React.Fragment>
-      {EXPEDITIONS.map(color =>
-        <Expedition
-          key={color}
-          color={color}
-          onScoreChange={onScoreChange}
-        />
-      )}
+      <Grid container>
+        {EXPEDITIONS.map(color =>
+          <Grid item xs={12} sm={4}>
+            <Expedition
+              key={color}
+              color={color}
+              onScoreChange={onScoreChange}
+            />
+          </Grid>
+        )}
+      </Grid>
       <ActionButton
         onClick={onActionClick}
         icon={faCheck}
