@@ -15,6 +15,10 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
   },
+  appBar: {
+    paddingTop: theme.spacing(1),
+    paddingBottom: theme.spacing(1),
+  },
   title: {
     flexGrow: 1,
   },
@@ -30,7 +34,7 @@ function Title({ className }) {
 
 function GameRound({ gameRound }) {
   return (
-    <Badge badgeContent={gameRound} color="secondary" aria-label="Game round">
+    <Badge badgeContent={gameRound} color="secondary" aria-label="Game round" overlap="circle">
       <IconButton color="inherit" disabled={gameRound == null}>
         <FontAwesomeIcon icon={faGamepad} />
       </IconButton>
@@ -40,7 +44,7 @@ function GameRound({ gameRound }) {
 
 function PlayerScore({ score, avatar, active }) {
   return (
-    <Badge badgeContent={score} color="secondary" aria-label="Player score">
+    <Badge badgeContent={score} color="secondary" aria-label="Player score" showZero overlap="circle">
       <IconButton color="inherit" disabled={!active}>
         <FontAwesomeIcon icon={avatar} />
       </IconButton>
@@ -53,7 +57,7 @@ function TopBar({ gameRound, scores, activePlayer }) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" className={classes.appBar}>
         <Toolbar>
           <Title className={classes.title} />
           <GameRound gameRound={gameRound} />
