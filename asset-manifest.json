@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/lost-cities/static/css/main.685dea8f.chunk.css",
-    "main.js": "/lost-cities/static/js/main.a3b650b2.chunk.js",
-    "main.js.map": "/lost-cities/static/js/main.a3b650b2.chunk.js.map",
+    "main.js": "/lost-cities/static/js/main.812c2962.chunk.js",
+    "main.js.map": "/lost-cities/static/js/main.812c2962.chunk.js.map",
     "runtime-main.js": "/lost-cities/static/js/runtime-main.b961af17.js",
     "runtime-main.js.map": "/lost-cities/static/js/runtime-main.b961af17.js.map",
-    "static/js/2.974c66b7.chunk.js": "/lost-cities/static/js/2.974c66b7.chunk.js",
-    "static/js/2.974c66b7.chunk.js.map": "/lost-cities/static/js/2.974c66b7.chunk.js.map",
+    "static/js/2.cd2bf71b.chunk.js": "/lost-cities/static/js/2.cd2bf71b.chunk.js",
+    "static/js/2.cd2bf71b.chunk.js.map": "/lost-cities/static/js/2.cd2bf71b.chunk.js.map",
     "index.html": "/lost-cities/index.html",
-    "precache-manifest.e6a85ad87032908cc4b9aba609040f70.js": "/lost-cities/precache-manifest.e6a85ad87032908cc4b9aba609040f70.js",
+    "precache-manifest.d8d30980eebe5858c951d68f0b4e0375.js": "/lost-cities/precache-manifest.d8d30980eebe5858c951d68f0b4e0375.js",
     "service-worker.js": "/lost-cities/service-worker.js",
     "static/css/main.685dea8f.chunk.css.map": "/lost-cities/static/css/main.685dea8f.chunk.css.map",
-    "static/js/2.974c66b7.chunk.js.LICENSE.txt": "/lost-cities/static/js/2.974c66b7.chunk.js.LICENSE.txt"
+    "static/js/2.cd2bf71b.chunk.js.LICENSE.txt": "/lost-cities/static/js/2.cd2bf71b.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.b961af17.js",
-    "static/js/2.974c66b7.chunk.js",
+    "static/js/2.cd2bf71b.chunk.js",
     "static/css/main.685dea8f.chunk.css",
-    "static/js/main.a3b650b2.chunk.js"
+    "static/js/main.812c2962.chunk.js"
   ]
 }
