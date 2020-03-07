@@ -20,10 +20,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "lint": "eslint src --max-warnings=0",
-    "test": "react-scripts test",
     "predeploy": "cross-env NODE_ENV=production REACT_APP_BUILD_URL=\"$CIRCLE_BUILD_URL\" yarn build",
-    "deploy": "gh-pages -d build -u \"Circle CI <circle@circleci.com>\" -x -r \"https://$GITHUB_TOKEN@github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME\" -m \"Build $CIRCLE_BUILD_NUM [ci skip]\"",
-    "eject": "react-scripts eject"
+    "deploy": "gh-pages -d build -u \"Circle CI <circle@circleci.com>\" -x -r \"https://$GITHUB_TOKEN@github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME\" -m \"Build $CIRCLE_BUILD_NUM [ci skip]\""
   },
   "eslintConfig": {
     "extends": [
@@ -52,9 +50,6 @@
     ]
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
     "cross-env": "^7.0.1",
     "eslint": "^6.6.0",
     "eslint-config-prettier": "^6.10.0",
