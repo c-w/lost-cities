@@ -22,21 +22,19 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function WinnerIcon() {
+function GameEnd({ player1Scores, player2Scores, onActionClick }) {
   const classes = useStyles();
 
-  return (
+  const player1Score = sum(player1Scores);
+  const player2Score = sum(player2Scores);
+
+  const winnerIcon = (
     <FontAwesomeIcon
       className={classes.winnerIcon}
       icon="trophy"
       aria-label={i8n.winner}
     />
   );
-}
-
-function GameEnd({ player1Scores, player2Scores, onActionClick }) {
-  const player1Score = sum(player1Scores);
-  const player2Score = sum(player2Scores);
 
   return (
     <Fragment>
@@ -49,11 +47,11 @@ function GameEnd({ player1Scores, player2Scores, onActionClick }) {
               </TableCell>
               <TableCell align="center">
                 <FontAwesomeIcon icon={PLAYER_1} aria-label={i8n.player1} />
-                {player1Score > player2Score && <WinnerIcon />}
+                {player1Score > player2Score && winnerIcon}
               </TableCell>
               <TableCell align="center">
                 <FontAwesomeIcon icon={PLAYER_2} aria-label={i8n.player2} />
-                {player2Score > player1Score && <WinnerIcon />}
+                {player2Score > player1Score && winnerIcon}
               </TableCell>
             </TableRow>
           </TableHead>
