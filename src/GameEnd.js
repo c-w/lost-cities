@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import sum from 'lodash.sum';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -10,7 +11,10 @@ import ActionButton from './ActionButton';
 import { PLAYER_1, PLAYER_2 } from './game';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-function GameEnd({ player1Score, player2Score, onActionClick }) {
+function GameEnd({ player1Scores, player2Scores, onActionClick }) {
+  const player1Score = sum(player1Scores);
+  const player2Score = sum(player2Scores);
+
   return (
     <Fragment>
       <TableContainer component={Paper}>
@@ -18,7 +22,10 @@ function GameEnd({ player1Score, player2Score, onActionClick }) {
           <TableHead>
             <TableRow>
               <TableCell align="center">Player</TableCell>
-              <TableCell align="center">Score</TableCell>
+              <TableCell align="center">Round 1</TableCell>
+              <TableCell align="center">Round 2</TableCell>
+              <TableCell align="center">Round 3</TableCell>
+              <TableCell align="center">Total</TableCell>
               <TableCell align="center">Winner</TableCell>
             </TableRow>
           </TableHead>
@@ -27,6 +34,9 @@ function GameEnd({ player1Score, player2Score, onActionClick }) {
               <TableCell align="center">
                 <FontAwesomeIcon icon={PLAYER_1} aria-label="Player 1" />
               </TableCell>
+              <TableCell align="center">{player1Scores[0]}</TableCell>
+              <TableCell align="center">{player1Scores[1]}</TableCell>
+              <TableCell align="center">{player1Scores[2]}</TableCell>
               <TableCell align="center">{player1Score}</TableCell>
               <TableCell align="center">
                 {player1Score > player2Score && (
@@ -38,6 +48,9 @@ function GameEnd({ player1Score, player2Score, onActionClick }) {
               <TableCell align="center">
                 <FontAwesomeIcon icon={PLAYER_2} aria-label="Player 2" />
               </TableCell>
+              <TableCell align="center">{player2Scores[0]}</TableCell>
+              <TableCell align="center">{player2Scores[1]}</TableCell>
+              <TableCell align="center">{player2Scores[2]}</TableCell>
               <TableCell align="center">{player2Score}</TableCell>
               <TableCell align="center">
                 {player2Score > player1Score && (

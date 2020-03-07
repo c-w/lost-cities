@@ -3,6 +3,7 @@ import GameEnd from './GameEnd';
 import Scorer from './Scorer';
 import TopBar from './TopBar';
 import { gameStateMachine } from './game';
+import sum from 'lodash.sum';
 import { interpret } from 'xstate';
 
 class App extends PureComponent {
@@ -32,22 +33,22 @@ class App extends PureComponent {
     const {
       activePlayer,
       gameRound,
-      player1Score,
-      player2Score,
+      player1Scores,
+      player2Scores,
     } = current.context;
 
     return (
       <Fragment>
         <TopBar
           gameRound={gameRound}
-          player1Score={player1Score}
-          player2Score={player2Score}
+          player1Score={sum(player1Scores)}
+          player2Score={sum(player2Scores)}
           activePlayer={activePlayer}
         />
         {current.matches('highscore') ? (
           <GameEnd
-            player1Score={player1Score}
-            player2Score={player2Score}
+            player1Scores={player1Scores}
+            player2Scores={player2Scores}
             onActionClick={this.onGameEndClick}
           />
         ) : (

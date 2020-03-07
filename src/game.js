@@ -47,8 +47,8 @@ export const gameStateMachine = Machine(
     context: {
       gameRound: 1,
       activePlayer: PLAYER_1,
-      player1Score: 0,
-      player2Score: 0,
+      player1Scores: [],
+      player2Scores: [],
     },
     states: {
       round1Player1: {
@@ -90,8 +90,8 @@ export const gameStateMachine = Machine(
       highscore: {
         entry: assign({ gameRound: null, activePlayer: null }),
         exit: assign({
-          player1Score: 0,
-          player2Score: 0,
+          player1Scores: [],
+          player2Scores: [],
         }),
         on: {
           RESTART: { target: 'round1Player1' },
@@ -107,10 +107,16 @@ export const gameStateMachine = Machine(
       setPlayer1: assign({ activePlayer: PLAYER_1 }),
       setPlayer2: assign({ activePlayer: PLAYER_2 }),
       setPlayer1Score: assign({
-        player1Score: (context, event) => context.player1Score + event.payload,
+        player1Scores: (context, event) => [
+          ...context.player1Scores,
+          event.payload,
+        ],
       }),
       setPlayer2Score: assign({
-        player2Score: (context, event) => context.player2Score + event.payload,
+        player2Scores: (context, event) => [
+          ...context.player2Scores,
+          event.payload,
+        ],
       }),
     },
   }
