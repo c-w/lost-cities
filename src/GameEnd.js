@@ -20,6 +20,9 @@ const useStyles = makeStyles(theme => ({
     paddingLeft: theme.spacing(1),
     color: '#D4AF37',
   },
+  totalRow: {
+    fontWeight: theme.typography.fontWeightBold,
+  },
 }));
 
 function GameEnd({ player1Scores, player2Scores, onActionClick }) {
@@ -64,9 +67,15 @@ function GameEnd({ player1Scores, player2Scores, onActionClick }) {
               </TableRow>
             ))}
             <TableRow>
-              <TableCell align="center">{i8n.total}</TableCell>
-              <TableCell align="center">{player1Score}</TableCell>
-              <TableCell align="center">{player2Score}</TableCell>
+              <TableCell className={classes.totalRow} align="center">
+                {i8n.total}
+              </TableCell>
+              <TableCell className={classes.totalRow} align="center">
+                {player1Score}
+              </TableCell>
+              <TableCell className={classes.totalRow} align="center">
+                {player2Score}
+              </TableCell>
             </TableRow>
           </TableBody>
         </Table>
