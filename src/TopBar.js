@@ -9,9 +9,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { PLAYER_1, PLAYER_2 } from './game';
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-  },
   appBar: {
     paddingTop: theme.spacing(1),
     paddingBottom: theme.spacing(1),
@@ -61,38 +58,36 @@ function TopBar({ gameRound, player1Score, player2Score, activePlayer }) {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static" className={classes.appBar}>
-        <Toolbar>
-          <Title className={classes.title} gameRound={gameRound} />
-          {gameRound != null && (
-            <Fragment>
-              <GameRound className={classes.gameRound} gameRound={gameRound} />
-              <PlayerScore
-                label={
-                  activePlayer === PLAYER_1
-                    ? 'Player 1 score, active player'
-                    : 'Player 1 score'
-                }
-                score={player1Score}
-                avatar={PLAYER_1}
-                active={activePlayer === PLAYER_1}
-              />
-              <PlayerScore
-                label={
-                  activePlayer === PLAYER_2
-                    ? 'Player 2 score, active player'
-                    : 'Player 2 score'
-                }
-                score={player2Score}
-                avatar={PLAYER_2}
-                active={activePlayer === PLAYER_2}
-              />
-            </Fragment>
-          )}
-        </Toolbar>
-      </AppBar>
-    </div>
+    <AppBar position="sticky" className={classes.appBar}>
+      <Toolbar>
+        <Title className={classes.title} gameRound={gameRound} />
+        {gameRound != null && (
+          <Fragment>
+            <GameRound className={classes.gameRound} gameRound={gameRound} />
+            <PlayerScore
+              label={
+                activePlayer === PLAYER_1
+                  ? 'Player 1 score, active player'
+                  : 'Player 1 score'
+              }
+              score={player1Score}
+              avatar={PLAYER_1}
+              active={activePlayer === PLAYER_1}
+            />
+            <PlayerScore
+              label={
+                activePlayer === PLAYER_2
+                  ? 'Player 2 score, active player'
+                  : 'Player 2 score'
+              }
+              score={player2Score}
+              avatar={PLAYER_2}
+              active={activePlayer === PLAYER_2}
+            />
+          </Fragment>
+        )}
+      </Toolbar>
+    </AppBar>
   );
 }
 
