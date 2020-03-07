@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { PLAYER_1, PLAYER_2 } from './game';
+import i8n from './i8n';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -24,7 +25,7 @@ const useStyles = makeStyles(theme => ({
 function Title({ className }) {
   return (
     <Typography variant="h6" component="h1" className={className}>
-      Lost Cities
+      {i8n.lostCities}
     </Typography>
   );
 }
@@ -32,7 +33,7 @@ function Title({ className }) {
 function GameRound({ className, gameRound }) {
   return (
     <Typography variant="subtitle1" component="span" className={className}>
-      Round {gameRound}
+      {i8n.round.format(gameRound)}
     </Typography>
   );
 }
@@ -47,7 +48,11 @@ function PlayerScore({ score, avatar, active, label }) {
       max={999}
       overlap="circle"
     >
-      <IconButton color="inherit" disabled={!active}>
+      <IconButton
+        color="inherit"
+        disabled={!active}
+        aria-label={active ? i8n.activePlayer : null}
+      >
         <FontAwesomeIcon icon={avatar} />
       </IconButton>
     </Badge>
@@ -65,21 +70,13 @@ function TopBar({ gameRound, player1Score, player2Score, activePlayer }) {
           <Fragment>
             <GameRound className={classes.gameRound} gameRound={gameRound} />
             <PlayerScore
-              label={
-                activePlayer === PLAYER_1
-                  ? 'Player 1 score, active player'
-                  : 'Player 1 score'
-              }
+              label={i8n.player1Score}
               score={player1Score}
               avatar={PLAYER_1}
               active={activePlayer === PLAYER_1}
             />
             <PlayerScore
-              label={
-                activePlayer === PLAYER_2
-                  ? 'Player 2 score, active player'
-                  : 'Player 2 score'
-              }
+              label={i8n.player2Score}
               score={player2Score}
               avatar={PLAYER_2}
               active={activePlayer === PLAYER_2}

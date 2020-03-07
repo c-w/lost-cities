@@ -14,6 +14,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ActionButton from './ActionButton';
 import ControlledCheckbox from './ControlledCheckbox';
 import { CARDS, EXPEDITIONS, calculateScore, isMultiplier } from './game';
+import i8n from './i8n';
 
 class ExpeditionCards extends PureComponent {
   constructor(props) {
@@ -60,7 +61,10 @@ class ExpeditionCards extends PureComponent {
               label={
                 <div style={{ color }}>
                   {isMultiplier(card) ? (
-                    <FontAwesomeIcon icon="handshake" aria-label="Investment" />
+                    <FontAwesomeIcon
+                      icon="handshake"
+                      aria-label={i8n.investment}
+                    />
                   ) : (
                     <Typography>{card}</Typography>
                   )}
@@ -96,7 +100,7 @@ class ExpeditionPanel extends PureComponent {
             <FontAwesomeIcon icon="compass" />
             &nbsp;
             <Typography variant="body1" component="span">
-              {score == null ? 'Click to start expedition' : `Score: ${score}`}
+              {score == null ? i8n.clickToStart : i8n.score.format(score)}
             </Typography>
           </Typography>
         </ExpansionPanelSummary>
@@ -130,7 +134,11 @@ class Scorer extends PureComponent {
             ))}
           </Grid>
         </div>
-        <ActionButton onClick={this.onActionClick} icon="check" label="Done" />
+        <ActionButton
+          onClick={this.onActionClick}
+          icon="check"
+          label={i8n.done}
+        />
       </Fragment>
     );
   }

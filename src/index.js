@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import format from 'string-format';
 import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck';
 import { faCompass } from '@fortawesome/free-solid-svg-icons/faCompass';
 import { faHandshake } from '@fortawesome/free-solid-svg-icons/faHandshake';
@@ -11,6 +12,8 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import './index.css';
+
+format.extend(String.prototype, {});
 
 library.add(
   faCheck,

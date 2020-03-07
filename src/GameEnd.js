@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ActionButton from './ActionButton';
 import { PLAYER_1, PLAYER_2 } from './game';
+import i8n from './i8n';
 
 const useStyles = makeStyles(theme => ({
   winnerIcon: {
@@ -28,7 +29,7 @@ function WinnerIcon() {
     <FontAwesomeIcon
       className={classes.winnerIcon}
       icon="trophy"
-      aria-label="Winner"
+      aria-label={i8n.winner}
     />
   );
 }
@@ -44,14 +45,14 @@ function GameEnd({ player1Scores, player2Scores, onActionClick }) {
           <TableHead>
             <TableRow>
               <TableCell align="center">
-                <Typography variant="srOnly">Label</Typography>
+                <Typography variant="srOnly">{i8n.label}</Typography>
               </TableCell>
               <TableCell align="center">
-                <FontAwesomeIcon icon={PLAYER_1} aria-label="Player 1" />
+                <FontAwesomeIcon icon={PLAYER_1} aria-label={i8n.player1} />
                 {player1Score > player2Score && <WinnerIcon />}
               </TableCell>
               <TableCell align="center">
-                <FontAwesomeIcon icon={PLAYER_2} aria-label="Player 2" />
+                <FontAwesomeIcon icon={PLAYER_2} aria-label={i8n.player2} />
                 {player2Score > player1Score && <WinnerIcon />}
               </TableCell>
             </TableRow>
@@ -59,13 +60,13 @@ function GameEnd({ player1Scores, player2Scores, onActionClick }) {
           <TableBody>
             {zip(player1Scores, player2Scores).map(([score1, score2], i) => (
               <TableRow key={i}>
-                <TableCell align="center">Round {i + 1}</TableCell>
+                <TableCell align="center">{i8n.round.format(i + 1)}</TableCell>
                 <TableCell align="center">{score1}</TableCell>
                 <TableCell align="center">{score2}</TableCell>
               </TableRow>
             ))}
             <TableRow>
-              <TableCell align="center">Total</TableCell>
+              <TableCell align="center">{i8n.total}</TableCell>
               <TableCell align="center">{player1Score}</TableCell>
               <TableCell align="center">{player2Score}</TableCell>
             </TableRow>
@@ -73,7 +74,7 @@ function GameEnd({ player1Scores, player2Scores, onActionClick }) {
         </Table>
       </TableContainer>
 
-      <ActionButton onClick={onActionClick} icon="redo" label="Restart" />
+      <ActionButton onClick={onActionClick} icon="redo" label={i8n.restart} />
     </Fragment>
   );
 }
