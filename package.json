@@ -11,6 +11,7 @@
     "lodash.frompairs": "^4.0.1",
     "lodash.partition": "^4.6.0",
     "lodash.sum": "^4.0.2",
+    "lodash.zip": "^4.2.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "xstate": "^4.7.8"
