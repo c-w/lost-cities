@@ -1,6 +1,4 @@
 import React, { Fragment, PureComponent } from 'react';
-import fromPairs from 'lodash.frompairs';
-import sum from 'lodash.sum';
 import withStyles from '@material-ui/core/styles/withStyles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
@@ -14,6 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ActionButton from './ActionButton';
 import ControlledCheckbox from './ControlledCheckbox';
 import { CARDS, EXPEDITIONS, calculateScore, isMultiplier } from './game';
+import { fromPairs, sum } from './utils';
 import i8n from './i8n';
 
 class ExpeditionCards extends PureComponent {

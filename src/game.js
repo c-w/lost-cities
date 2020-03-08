@@ -1,11 +1,10 @@
-import partition from 'lodash.partition';
-import sum from 'lodash.sum';
 import blue from '@material-ui/core/colors/blue';
 import green from '@material-ui/core/colors/green';
 import grey from '@material-ui/core/colors/grey';
 import red from '@material-ui/core/colors/red';
 import yellow from '@material-ui/core/colors/yellow';
 import { Machine, assign } from 'xstate';
+import { partition, sum } from './utils';
 
 export const PLAYER_1 = 'user-astronaut';
 export const PLAYER_2 = 'user-ninja';

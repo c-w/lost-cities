@@ -1,10 +1,10 @@
 import React, { Fragment, PureComponent } from 'react';
-import sum from 'lodash.sum';
 import { State, interpret } from 'xstate';
 import GameEnd from './GameEnd';
 import Scorer from './Scorer';
 import TopBar from './TopBar';
 import { gameStateMachine } from './game';
+import { sum } from './utils';
 
 const STATE_KEY = 'game-state-machine';
 

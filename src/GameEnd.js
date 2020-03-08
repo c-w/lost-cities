@@ -1,6 +1,4 @@
 import React, { Fragment } from 'react';
-import sum from 'lodash.sum';
-import zip from 'lodash.zip';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -13,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ActionButton from './ActionButton';
 import { PLAYER_1, PLAYER_2 } from './game';
+import { sum, zip } from './utils';
 import i8n from './i8n';
 
 const useStyles = makeStyles(theme => ({
