@@ -1,22 +1,34 @@
 import React, { Fragment, PureComponent } from 'react';
 import sum from 'lodash.sum';
-import { interpret } from 'xstate';
+import { State, interpret } from 'xstate';
 import GameEnd from './GameEnd';
 import Scorer from './Scorer';
 import TopBar from './TopBar';
 import { gameStateMachine } from './game';
+
+const STATE_KEY = 'game-state-machine';
 
 class App extends PureComponent {
   state = {
     current: gameStateMachine.initialState,
   };
 
-  service = interpret(gameStateMachine).onTransition(current =>
-    this.setState({ current })
-  );
+  service = interpret(gameStateMachine).onTransition(current => {
+    this.setState({ current });
+
+    try {
+      localStorage.setItem(STATE_KEY, JSON.stringify(current));
+    } catch (e) {
+      console.error('LocalStorage not available', e);
+    }
+  });
 
   componentDidMount() {
-    this.service.start();
+    const savedState = JSON.parse(localStorage.getItem(STATE_KEY));
+    const lastState = State.create(savedState || gameStateMachine.initialState);
+    const currentState = gameStateMachine.resolveState(lastState);
+
+    this.service.start(currentState);
   }
 
   componentWillUnmount() {
@@ -25,7 +37,7 @@ class App extends PureComponent {
 
   onScorerClick = payload => this.service.send({ type: 'DONE', payload });
 
-  onGameEndClick = payload => this.service.send({ type: 'RESTART', payload });
+  onGameEndClick = () => this.service.send({ type: 'RESTART' });
 
   render() {
     const { current } = this.state;
