@@ -3,9 +3,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormGroup from '@material-ui/core/FormGroup';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -49,9 +47,9 @@ class ExpeditionCards extends PureComponent {
     const { color } = this.props;
 
     return (
-      <FormControl component="fieldset" style={{ width: '100%' }}>
-        <FormGroup>
-          {CARDS.map(card => (
+      <Grid container>
+        {CARDS.map(card => (
+          <Grid item key={card} xs={4} sm={6} lg={12}>
             <FormControlLabel
               key={card}
               control={
@@ -70,9 +68,9 @@ class ExpeditionCards extends PureComponent {
                 </div>
               }
             />
-          ))}
-        </FormGroup>
-      </FormControl>
+          </Grid>
+        ))}
+      </Grid>
     );
   }
 }
