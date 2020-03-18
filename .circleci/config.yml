@@ -5,15 +5,15 @@ jobs:
       - image: circleci/node:lts
     steps:
       - checkout
-      - run: yarn install
-      - run: yarn run lint
+      - run: npm install
+      - run: npm run lint
   deploy:
     docker:
       - image: circleci/node:lts
     steps:
       - checkout
-      - run: yarn install
-      - run: yarn run deploy
+      - run: npm install
+      - run: npm run deploy
 
 workflows:
   version: 2
