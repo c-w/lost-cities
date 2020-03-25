@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Badge from '@material-ui/core/Badge';
-import IconButton from '@material-ui/core/IconButton';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import makeStyles from '@material-ui/core/styles/makeStyles';
@@ -20,6 +19,11 @@ const useStyles = makeStyles(theme => ({
   gameRound: {
     flexGrow: 1,
   },
+  playerScore: ({ active }) => ({
+    padding: '12px',
+    fontSize: '1.5rem',
+    color: active ? 'inherit' : 'rgba(0, 0, 0, 0.26)',
+  }),
 }));
 
 function Title({ className }) {
@@ -39,6 +43,8 @@ function GameRound({ className, gameRound }) {
 }
 
 function PlayerScore({ score, avatar, active, label }) {
+  const classes = useStyles({ active });
+
   return (
     <Badge
       badgeContent={score}
@@ -48,13 +54,11 @@ function PlayerScore({ score, avatar, active, label }) {
       max={999}
       overlap="circle"
     >
-      <IconButton
-        color="inherit"
-        disabled={!active}
+      <FontAwesomeIcon
+        className={classes.playerScore}
+        icon={avatar}
         aria-label={active ? i8n.activePlayer : null}
-      >
-        <FontAwesomeIcon icon={avatar} />
-      </IconButton>
+      />
     </Badge>
   );
 }
