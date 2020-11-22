@@ -1,4 +1,4 @@
-export default {
+const i8n = {
   winner: 'Winner',
   label: 'Label',
   player1: 'Player 1',
@@ -15,3 +15,5 @@ export default {
   player2Score: 'Player 2 score',
   activePlayer: 'Active player',
 };
+
+export default i8n;
